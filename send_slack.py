@@ -1,6 +1,9 @@
 import requests
+import os
+from dotenv import load_dotenv
 
-SLACK_TOKEN = "YOUR_BOT_TOKEN"  # ここにトークンを入れる
+load_dotenv()
+SLACK_TOKEN = os.getenv("SLACK_BOT_TOKEN")
 CHANNEL = "#test-api"
 
 def send_message(channel, message):
@@ -15,7 +18,6 @@ def send_message(channel, message):
     }
     response = requests.post(url, headers=headers, json=body)
     result = response.json()
-
     if result["ok"]:
         print("✅ メッセージを送信しました！")
         print(f"📢 チャンネル: {channel}")
